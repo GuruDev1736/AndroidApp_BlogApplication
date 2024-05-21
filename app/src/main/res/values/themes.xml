@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Blog_Application" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="fontFamily">@font/popins</item>
+        <item name="android:statusBarColor">@color/primary</item>
     </style>
 
     <style name="Theme.Blog_Application" parent="Base.Theme.Blog_Application" />
