@@ -110,6 +110,10 @@ class LoginActivity : AppCompatActivity() {
                             Constant.error(this@LoginActivity,"Data is Null")
                         }
                     }
+                    else
+                    {
+                        Constant.error(this@LoginActivity,"Failed to login")
+                    }
                 }
 
                 override fun onFailure(call: Call<LoginResponseModel>, t: Throwable) {
