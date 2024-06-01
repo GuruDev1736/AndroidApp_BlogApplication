@@ -1,10 +1,12 @@
 package com.gurudev.blog_application.Retrofit
 
+import com.gurudev.blog_application.RequestModel.ChangePasswordRequestModel
 import com.gurudev.blog_application.RequestModel.LoginRequestModel
 import com.gurudev.blog_application.RequestModel.RegisterRequestModel
 import com.gurudev.blog_application.RequestModel.createPostRequestModel
 import com.gurudev.blog_application.RequestModel.updateUserRequestModel
 import com.gurudev.blog_application.ResponseModel.CategoryResponseModelItem
+import com.gurudev.blog_application.ResponseModel.DefaultResponseModel
 import com.gurudev.blog_application.ResponseModel.LoginResponseModel
 import com.gurudev.blog_application.ResponseModel.PostListModel
 import com.gurudev.blog_application.ResponseModel.PostResponseModel
@@ -44,5 +46,8 @@ interface ApiInterface {
 
     @PUT("api/user/update/{userId}")
     fun updateUser( @Header("Authorization") token : String , @Path("userId") userId : Int , @Body model : updateUserRequestModel):Call<ProfileResponse>
+
+    @PUT("api/user/changePass/{userId}")
+    fun updatePassword( @Header("Authorization") token : String , @Path("userId") userId : Int , @Body model : ChangePasswordRequestModel):Call<DefaultResponseModel>
 
 }
