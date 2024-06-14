@@ -1,17 +1,19 @@
 package com.gurudev.blog_application.Retrofit
 
 import com.gurudev.blog_application.RequestModel.ChangePasswordRequestModel
+import com.gurudev.blog_application.RequestModel.CommentRequestModel
 import com.gurudev.blog_application.RequestModel.LoginRequestModel
 import com.gurudev.blog_application.RequestModel.RegisterRequestModel
 import com.gurudev.blog_application.RequestModel.createPostRequestModel
 import com.gurudev.blog_application.RequestModel.updateUserRequestModel
 import com.gurudev.blog_application.ResponseModel.CategoryResponseModelItem
+import com.gurudev.blog_application.ResponseModel.CommentResponseModel
 import com.gurudev.blog_application.ResponseModel.DefaultResponseModel
 import com.gurudev.blog_application.ResponseModel.LoginResponseModel
-import com.gurudev.blog_application.ResponseModel.PostListModel
 import com.gurudev.blog_application.ResponseModel.PostResponseModel
 import com.gurudev.blog_application.ResponseModel.ProfileResponse
 import com.gurudev.blog_application.ResponseModel.RegisterResponseModel
+import com.gurudev.blog_application.ResponseModel.getPostByIdResponseModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -35,10 +37,13 @@ interface ApiInterface {
     fun createPost(@Header("Authorization") token : String , @Path("userId") userId : Int , @Path("categoryId") categoryId : Int , @Body model : createPostRequestModel):Call<PostResponseModel>
 
     @GET("api/post/")
-    fun getPosts():Call<PostListModel>
+    fun getPosts():Call<PostResponseModel>
+
+    @GET("api/post/{postId}")
+    fun getPostsUsingId(@Path("postId") id : Int):Call<getPostByIdResponseModel>
 
     @GET("api/post/user/{userId}")
-    fun getPostsById(@Path("userId") userId : Int):Call<PostListModel>
+    fun getPostsById(@Path("userId") userId : Int):Call<PostResponseModel>
 
     @GET("api/user/{userId}")
     fun getUserById(@Path("userId") userId : Int):Call<ProfileResponse>
@@ -49,5 +54,10 @@ interface ApiInterface {
 
     @PUT("api/user/changePass/{userId}")
     fun updatePassword( @Header("Authorization") token : String , @Path("userId") userId : Int , @Body model : ChangePasswordRequestModel):Call<DefaultResponseModel>
+
+    @POST("api/comment/{userId}/{postId}/create")
+    fun postComment(@Header("Authorization") token : String , @Path("userId") userId : Int , @Path("postId") postId : Int , @Body model : CommentRequestModel):Call<CommentResponseModel>
+
+
 
 }

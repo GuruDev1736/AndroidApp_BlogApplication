@@ -1,14 +1,17 @@
 package com.gurudev.blog_application.Adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.gurudev.blog_application.Activities.ui.home.CommentFragment
 import com.gurudev.blog_application.ResponseModel.Content
-import com.gurudev.blog_application.ResponseModel.PostListModel
 import com.gurudev.blog_application.databinding.PostLayoutBinding
 import java.util.Locale
 
-class PostAdapter(private val dataList : List<Content>) : RecyclerView.Adapter<PostAdapter.onViewHolder>(){
+
+class PostAdapter(private val context : Context , private val dataList : List<Content>) : RecyclerView.Adapter<PostAdapter.onViewHolder>(){
 
     private var filteredList: List<Content> = dataList
     class onViewHolder(val binding : PostLayoutBinding) : RecyclerView.ViewHolder(binding.root)
@@ -30,6 +33,10 @@ class PostAdapter(private val dataList : List<Content>) : RecyclerView.Adapter<P
             title.text = currentItem.title
             content.text = getTruncatedContent(currentItem.content)
             username.text = currentItem.user.name
+            comment.setOnClickListener{
+                val bottomSheetFragment = CommentFragment.newInstance(currentItem.postId)
+                bottomSheetFragment.show((context as AppCompatActivity).supportFragmentManager, bottomSheetFragment.tag)
+            }
         }
 
     }

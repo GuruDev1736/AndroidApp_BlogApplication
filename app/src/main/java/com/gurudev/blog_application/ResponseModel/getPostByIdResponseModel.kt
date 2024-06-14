@@ -1,6 +1,6 @@
 package com.gurudev.blog_application.ResponseModel
 
-data class Content(
+data class getPostByIdResponseModel(
     val addedDate: Long,
     val categories: Categories,
     val comments: List<Comment>,
